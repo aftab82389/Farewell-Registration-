@@ -1,6 +1,7 @@
 const name = document.querySelector('#name');
 const semester = document.querySelector('#semester');
 const phone = document.querySelector('#phone');
+const category =document.querySelector('#category');
 const btn = document.querySelector('#btn');
 
 phone.addEventListener('input', () => {
@@ -32,12 +33,15 @@ function limitLength(input, maxLength) {
 function setData() {
   set(ref(db, "Users/" + phone.value.trim()), {
     Name: name.value.trim(),
-    Semester: semester.value
+    Semester: semester.value,
+    Phone: phone.value.trim(),
+    Category: category.value
   });
   
   name.value = "";
   phone.value = "";
   semester.value = "";
+  category.value = "";
 }
 
 function checkPhoneExists(phoneNumber, callback) {
@@ -48,7 +52,7 @@ function checkPhoneExists(phoneNumber, callback) {
 }
 
 btn.addEventListener('click', () => {
-  if (name.value && phone.value && semester.value) {
+  if (name.value && phone.value && semester.value && category.value) {
     if (phone.value.length == 10) {
       checkPhoneExists(phone.value.trim(), (exists) => {
         if (exists) {
